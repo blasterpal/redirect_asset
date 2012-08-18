@@ -59,8 +59,11 @@ module RedirectAsset
     # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
 
+    # Your path to S3 for example. 
+    # REVERSE_PROXY_PATH = 'http://hbeaver-www.s3.amazonaws.com'
     config.middleware.use Rack::ReverseProxy do
-      reverse_proxy /^\/static(\/.*)$/ , 'http://hbeaver-www.s3.amazonaws.com$1' 
+      reverse_proxy /^\/static(\/.*)$/ , #{ENV['REVERSE_PROXY_PATH']}$1" 
+
     end
 
   end
